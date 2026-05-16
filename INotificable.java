@@ -1,0 +1,1 @@
+// Interfaz INotificable - Patron Observer
