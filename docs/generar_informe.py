@@ -191,6 +191,9 @@ parrafo_enlace("Rama de desarrollo integrada", "https://github.com/JBorys687/hel
 parrafo_enlace("Rama de la actividad", "https://github.com/JBorys687/helpdesk-datacenter/tree/feature/backend-api")
 parrafo_enlace("Commit de implementación", "https://github.com/JBorys687/helpdesk-datacenter/commit/a7b6188")
 
+titulo("Archivos de la aplicación en Google Drive")
+parrafo_enlace("Carpeta compartida de la Actividad 8", "https://drive.google.com/drive/folders/1Ymn-EO8LBrUPv6qqT2ASUzFPNta5Pf9b?usp=sharing")
+
 titulo("Bibliografía")
 for referencia in [
     "Spring. (2026). Spring Boot Reference Documentation. https://docs.spring.io/spring-boot/",
