@@ -5,6 +5,8 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,6 +68,28 @@ def vineta(texto):
     p.paragraph_format.first_line_indent = Inches(-0.18)
     p.add_run("• ").bold = True
     p.add_run(texto)
+    return p
+
+def parrafo_enlace(etiqueta, url):
+    p = doc.add_paragraph()
+    p.add_run(etiqueta + ": ")
+    relacion = p.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    enlace = OxmlElement("w:hyperlink")
+    enlace.set(qn("r:id"), relacion)
+    run = OxmlElement("w:r")
+    propiedades = OxmlElement("w:rPr")
+    color = OxmlElement("w:color")
+    color.set(qn("w:val"), "0563C1")
+    subrayado = OxmlElement("w:u")
+    subrayado.set(qn("w:val"), "single")
+    propiedades.append(color)
+    propiedades.append(subrayado)
+    texto = OxmlElement("w:t")
+    texto.text = url
+    run.append(propiedades)
+    run.append(texto)
+    enlace.append(run)
+    p._p.append(enlace)
     return p
 
 doc.add_page_break()
@@ -162,10 +186,10 @@ parrafo("La API desarrollada cumple los requisitos funcionales de la Actividad 8
 parrafo("El proyecto puede ejecutarse localmente mediante Docker y contiene una colección Postman, pruebas automáticas y documentación de uso. El código se organizó en la rama feature/backend-api para integrarlo posteriormente en develop, siguiendo el flujo de control de versiones solicitado.")
 
 titulo("Repositorio")
-parrafo("Repositorio principal: https://github.com/JBorys687/helpdesk-datacenter")
-parrafo("Rama de desarrollo integrada: https://github.com/JBorys687/helpdesk-datacenter/tree/develop")
-parrafo("Rama de la actividad: https://github.com/JBorys687/helpdesk-datacenter/tree/feature/backend-api")
-parrafo("Commit de implementación: https://github.com/JBorys687/helpdesk-datacenter/commit/a7b6188")
+parrafo_enlace("Repositorio principal", "https://github.com/JBorys687/helpdesk-datacenter")
+parrafo_enlace("Rama de desarrollo integrada", "https://github.com/JBorys687/helpdesk-datacenter/tree/develop")
+parrafo_enlace("Rama de la actividad", "https://github.com/JBorys687/helpdesk-datacenter/tree/feature/backend-api")
+parrafo_enlace("Commit de implementación", "https://github.com/JBorys687/helpdesk-datacenter/commit/a7b6188")
 
 titulo("Bibliografía")
 for referencia in [
