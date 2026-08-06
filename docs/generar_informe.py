@@ -162,7 +162,10 @@ parrafo("La API desarrollada cumple los requisitos funcionales de la Actividad 8
 parrafo("El proyecto puede ejecutarse localmente mediante Docker y contiene una colección Postman, pruebas automáticas y documentación de uso. El código se organizó en la rama feature/backend-api para integrarlo posteriormente en develop, siguiendo el flujo de control de versiones solicitado.")
 
 titulo("Repositorio")
-parrafo("Código fuente: https://github.com/JBorys687/helpdesk-datacenter")
+parrafo("Repositorio principal: https://github.com/JBorys687/helpdesk-datacenter")
+parrafo("Rama de desarrollo integrada: https://github.com/JBorys687/helpdesk-datacenter/tree/develop")
+parrafo("Rama de la actividad: https://github.com/JBorys687/helpdesk-datacenter/tree/feature/backend-api")
+parrafo("Commit de implementación: https://github.com/JBorys687/helpdesk-datacenter/commit/a7b6188")
 
 titulo("Bibliografía")
 for referencia in [
