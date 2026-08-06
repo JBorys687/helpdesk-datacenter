@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "titulo": "Falla de red en laboratorio",
+    "descripcion": "Los equipos no tienen acceso a Internet",
+    "categoria": "RED",
+    "prioridad": "ALTA",
+    "estado": "ABIERTO",
+    "creadoEn": "2026-08-06T06:08:05.652929Z",
+    "actualizadoEn": "2026-08-06T06:08:05.652929Z"
+  }
+]
