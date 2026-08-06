@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "titulo": "Falla de red en laboratorio",
+  "descripcion": "Conectividad restablecida y verificada",
+  "categoria": "RED",
+  "prioridad": "MEDIA",
+  "estado": "CERRADO",
+  "creadoEn": "2026-08-06T06:08:05.652929Z",
+  "actualizadoEn": "2026-08-06T06:08:05.889254225Z"
+}
