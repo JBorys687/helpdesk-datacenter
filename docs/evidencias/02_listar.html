@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box} body{margin:0;background:#f3f6fa;font-family:Arial,sans-serif;color:#172033}
+.top{height:72px;background:#172b4d;color:white;display:flex;align-items:center;padding:0 42px;font-size:24px;font-weight:bold}
+.ok{margin-left:auto;background:#16855b;border-radius:18px;padding:8px 16px;font-size:15px}
+.page{padding:32px 44px}.label{color:#52627a;font-size:14px;font-weight:bold;text-transform:uppercase;margin-bottom:8px}
+.request{display:flex;background:white;border:1px solid #d8e0ea;border-radius:8px;overflow:hidden;margin-bottom:24px}
+.method{padding:16px 22px;color:white;font-weight:bold;background:#2867d6}.url{padding:16px;font-family:monospace;font-size:17px}
+.panel{background:#101723;color:#d7e4f2;border-radius:8px;padding:22px;margin-bottom:24px;box-shadow:0 3px 12px #ccd4df}
+pre{margin:0;white-space:pre-wrap;font:15px/1.5 'DejaVu Sans Mono',monospace}.response{border-left:5px solid #20a06b}
+.foot{color:#687890;font-size:13px;margin-top:18px}
+</style></head>
+<body><div class="top">Help Desk API — Prueba con cURL <span class="ok">HTTP 200 OK</span></div>
+<main class="page"><div class="label">Petición autenticada</div><div class="request"><div class="method">GET</div>
+<div class="url">http://localhost:8080/tickets</div></div>
+<div class="label">Respuesta real de la API</div><div class="panel response"><pre>[
+  {
+    &quot;id&quot;: 1,
+    &quot;titulo&quot;: &quot;Falla de red en laboratorio&quot;,
+    &quot;descripcion&quot;: &quot;Los equipos no tienen acceso a Internet&quot;,
+    &quot;categoria&quot;: &quot;RED&quot;,
+    &quot;prioridad&quot;: &quot;ALTA&quot;,
+    &quot;estado&quot;: &quot;ABIERTO&quot;,
+    &quot;creadoEn&quot;: &quot;2026-08-06T06:08:05.652929Z&quot;,
+    &quot;actualizadoEn&quot;: &quot;2026-08-06T06:08:05.652929Z&quot;
+  }
+]</pre></div>
+<div class="foot">Actividad 8 · Spring Boot · PostgreSQL · Respuesta capturada automáticamente el 6 de agosto de 2026</div>
+</main></body></html>

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: helpdesk-api
+  datasource:
+    # DATABASE_URL permite fijar la cadena JDBC completa (uso local /
+    # docker-compose). En la nube (Render), se arma a partir de host/puerto/
+    # nombre inyectados automáticamente desde el add-on de PostgreSQL.
+    url: ${DATABASE_URL:jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:helpdesk}}
+    username: ${DATABASE_USER:helpdesk}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never

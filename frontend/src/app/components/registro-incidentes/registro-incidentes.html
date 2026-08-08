@@ -1,0 +1,68 @@
+<section class="registro">
+  <header class="dashboard-header">
+    <h1>Registro de Incidentes</h1>
+    <p>Completa el formulario para reportar un nuevo ticket en el Help Desk.</p>
+  </header>
+
+  <form class="tarjeta-formulario" [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+    <div class="campo">
+      <label for="titulo">Título</label>
+      <input id="titulo" type="text" formControlName="titulo" maxlength="150" placeholder="Ej. Impresora del laboratorio no responde" />
+      @if (formulario.controls.titulo.invalid && formulario.controls.titulo.touched) {
+        <small class="campo-error">El título es obligatorio (máximo 150 caracteres).</small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" formControlName="descripcion" maxlength="2000" rows="5"
+        placeholder="Describe el incidente con el mayor detalle posible"></textarea>
+      @if (formulario.controls.descripcion.invalid && formulario.controls.descripcion.touched) {
+        <small class="campo-error">La descripción es obligatoria (máximo 2000 caracteres).</small>
+      }
+    </div>
+
+    <div class="campo-grupo">
+      <div class="campo">
+        <label for="categoria">Categoría</label>
+        <select id="categoria" formControlName="categoria">
+          @for (categoria of categorias; track categoria) {
+            <option [value]="categoria">{{ categoria }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="prioridad">Prioridad</label>
+        <select id="prioridad" formControlName="prioridad">
+          @for (prioridad of prioridades; track prioridad) {
+            <option [value]="prioridad">{{ prioridad }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="estado">Estado inicial</label>
+        <select id="estado" formControlName="estado">
+          @for (estado of estados; track estado) {
+            <option [value]="estado">{{ estado }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    @if (error()) {
+      <p class="mensaje-error">{{ error() }}</p>
+    }
+    @if (exito()) {
+      <p class="mensaje-exito">✅ Incidente registrado correctamente.</p>
+    }
+
+    <div class="acciones-formulario">
+      <button type="submit" [disabled]="enviando()">
+        {{ enviando() ? 'Guardando…' : 'Registrar incidente' }}
+      </button>
+      <button type="button" class="btn-secundario" (click)="irAListado()">Ver listado</button>
+    </div>
+  </form>
+</section>

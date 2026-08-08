@@ -1,0 +1,76 @@
+<section class="dashboard">
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Resumen general de los incidentes reportados en el Help Desk.</p>
+  </header>
+
+  @if (cargando()) {
+    <p class="estado-info">Cargando datos desde la API…</p>
+  } @else if (error()) {
+    <p class="estado-error">
+      No se pudo conectar con la API. Verifica que el backend esté activo y que
+      la URL configurada en <code>environment.ts</code> sea correcta.
+    </p>
+    <button type="button" (click)="cargarTickets()">Reintentar</button>
+  } @else {
+    <div class="tarjetas">
+      <article class="tarjeta tarjeta-total">
+        <span class="tarjeta-valor">{{ total }}</span>
+        <span class="tarjeta-etiqueta">Tickets totales</span>
+      </article>
+      @for (item of porEstado; track item.etiqueta) {
+        <article class="tarjeta" [class]="'tarjeta-estado-' + item.etiqueta">
+          <span class="tarjeta-valor">{{ item.valor }}</span>
+          <span class="tarjeta-etiqueta">{{ item.etiqueta }}</span>
+        </article>
+      }
+    </div>
+
+    <div class="paneles">
+      <article class="panel">
+        <h2>Por categoría</h2>
+        @for (item of porCategoria; track item.etiqueta) {
+          <div class="barra-fila">
+            <span class="barra-etiqueta">{{ item.etiqueta }}</span>
+            <div class="barra-fondo">
+              <div class="barra-relleno" [style.width.%]="total ? (item.valor / total) * 100 : 0"></div>
+            </div>
+            <span class="barra-valor">{{ item.valor }}</span>
+          </div>
+        }
+      </article>
+
+      <article class="panel">
+        <h2>Por prioridad</h2>
+        @for (item of porPrioridad; track item.etiqueta) {
+          <div class="barra-fila">
+            <span class="barra-etiqueta">{{ item.etiqueta }}</span>
+            <div class="barra-fondo">
+              <div class="barra-relleno" [class]="'prioridad-' + item.etiqueta" [style.width.%]="total ? (item.valor / total) * 100 : 0"></div>
+            </div>
+            <span class="barra-valor">{{ item.valor }}</span>
+          </div>
+        }
+      </article>
+    </div>
+
+    <article class="panel">
+      <h2>Últimos incidentes reportados</h2>
+      @if (recientes.length === 0) {
+        <p class="estado-info">
+          Aún no hay tickets registrados. <a routerLink="/registro">Crea el primero</a>.
+        </p>
+      } @else {
+        <ul class="lista-recientes">
+          @for (ticket of recientes; track ticket.id) {
+            <li>
+              <span class="badge" [class]="'badge-' + ticket.estado">{{ ticket.estado }}</span>
+              <span class="lista-titulo">{{ ticket.titulo }}</span>
+              <span class="lista-meta">{{ ticket.categoria }} · {{ ticket.prioridad }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </article>
+  }
+</section>

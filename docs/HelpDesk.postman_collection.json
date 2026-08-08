@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "Help Desk API - Actividad 8",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {"key": "username", "value": "{{usuario}}", "type": "string"},
+      {"key": "password", "value": "{{contrasena}}", "type": "string"}
+    ]
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "usuario", "value": "user"},
+    {"key": "contrasena", "value": ""},
+    {"key": "ticketId", "value": "1"}
+  ],
+  "item": [
+    {
+      "name": "Crear ticket",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"titulo\": \"Falla de red\",\n  \"descripcion\": \"Sin conexión en laboratorio\",\n  \"categoria\": \"RED\",\n  \"prioridad\": \"ALTA\",\n  \"estado\": \"ABIERTO\"\n}"},
+        "url": "{{baseUrl}}/tickets"
+      },
+      "event": [{"listen": "test", "script": {"exec": ["pm.test('Creado: 201', () => pm.response.to.have.status(201));", "pm.collectionVariables.set('ticketId', pm.response.json().id);"]}}]
+    },
+    {"name": "Listar tickets", "request": {"method": "GET", "url": "{{baseUrl}}/tickets"}},
+    {"name": "Buscar ticket", "request": {"method": "GET", "url": "{{baseUrl}}/tickets/{{ticketId}}"}},
+    {
+      "name": "Actualizar ticket",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"titulo\": \"Falla de red\",\n  \"descripcion\": \"Conexión restablecida\",\n  \"categoria\": \"RED\",\n  \"prioridad\": \"MEDIA\",\n  \"estado\": \"CERRADO\"\n}"},
+        "url": "{{baseUrl}}/tickets/{{ticketId}}"
+      }
+    },
+    {"name": "Eliminar ticket", "request": {"method": "DELETE", "url": "{{baseUrl}}/tickets/{{ticketId}}"}}
+  ]
+}

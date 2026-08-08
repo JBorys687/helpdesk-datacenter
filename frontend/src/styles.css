@@ -1,0 +1,209 @@
+/* Estilos globales — Help Desk UTM (Actividad 9, DSI)
+   Paleta inspirada en el verde institucional de la Universidad Técnica de
+   Manabí, con foco en legibilidad, contraste y diseño adaptable (Responsive). */
+
+:root {
+  --color-primario: #1f6b3a;
+  --color-primario-oscuro: #154d29;
+  --color-primario-claro: #e6f2ea;
+  --color-acento: #f5b301;
+  --color-fondo: #f4f6f5;
+  --color-superficie: #ffffff;
+  --color-texto: #1c2b22;
+  --color-texto-suave: #5a6b60;
+  --color-borde: #dbe4de;
+  --color-error: #c0392b;
+  --color-error-fondo: #fdecea;
+  --color-exito: #1f6b3a;
+  --color-exito-fondo: #e6f2ea;
+  --color-alta: #c0392b;
+  --color-media: #d68910;
+  --color-baja: #2e7d32;
+  --color-abierto: #c0392b;
+  --color-progreso: #d68910;
+  --color-cerrado: #2e7d32;
+  --radio: 10px;
+  --sombra: 0 2px 10px rgba(28, 43, 34, 0.08);
+  --sombra-fuerte: 0 8px 30px rgba(28, 43, 34, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.4em;
+  color: var(--color-primario-oscuro);
+}
+
+a {
+  color: var(--color-primario);
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+main {
+  min-height: 100vh;
+}
+
+main.con-navbar {
+  padding-top: 64px;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header p {
+  color: var(--color-texto-suave);
+  margin: 0;
+}
+
+.estado-info,
+.estado-error {
+  padding: 1rem;
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+  box-shadow: var(--sombra);
+}
+
+.estado-error {
+  color: var(--color-error);
+  background: var(--color-error-fondo);
+}
+
+.mensaje-error {
+  color: var(--color-error);
+  background: var(--color-error-fondo);
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radio);
+  font-size: 0.9rem;
+}
+
+.mensaje-exito {
+  color: var(--color-exito);
+  background: var(--color-exito-fondo);
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radio);
+  font-size: 0.9rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.badge-ABIERTO {
+  background: var(--color-abierto);
+}
+
+.badge-EN_PROGRESO {
+  background: var(--color-progreso);
+}
+
+.badge-CERRADO {
+  background: var(--color-cerrado);
+}
+
+.badge-prioridad-ALTA {
+  background: var(--color-alta);
+}
+
+.badge-prioridad-MEDIA {
+  background: var(--color-media);
+}
+
+.badge-prioridad-BAJA {
+  background: var(--color-baja);
+}
+
+/* Formularios reutilizables */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-primario-oscuro);
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font-size: 1rem;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+  outline: 2px solid var(--color-primario);
+  outline-offset: 1px;
+}
+
+.campo-error {
+  color: var(--color-error);
+  font-size: 0.8rem;
+}
+
+button[type='submit'],
+.acciones-formulario button:first-child {
+  background: var(--color-primario);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--color-primario);
+  border: 1px solid var(--color-primario);
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .campo-grupo {
+    grid-template-columns: 1fr !important;
+  }
+}
