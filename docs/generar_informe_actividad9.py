@@ -20,10 +20,9 @@ OUTPUT = ROOT / "docs/Entrega_Actividad_9_Borys_Alexy_Panezo_Guerrero.docx"
 EVIDENCIAS = ROOT / "docs/evidencias9"
 
 # ── Datos que dependen del despliegue (completar antes de generar la versión final) ──
-URL_BACKEND = "PENDIENTE: URL pública del backend en Render (ej. https://helpdesk-datacenter-api.onrender.com)"
-URL_FRONTEND = "PENDIENTE: URL pública del frontend en Vercel (ej. https://helpdesk-datacenter.vercel.app)"
-URL_VIDEO = "PENDIENTE: enlace del video de sustentación (Drive/YouTube/Loom, sin restricción de acceso)"
-URL_DRIVE = "PENDIENTE: carpeta de Drive con los archivos de la aplicación"
+URL_BACKEND = "https://helpdesk-datacenter-api.onrender.com"
+URL_FRONTEND = "https://helpdesk-datacenter-blush.vercel.app"
+URL_VIDEO = "PENDIENTE: enlace del video de sustentación (Drive/YouTube/Loom, sin restricción de acceso) — REQUISITO OBLIGATORIO, ver docs/GUION_VIDEO_SUSTENTACION.md"
 
 doc = Document(TEMPLATE)
 
@@ -185,7 +184,18 @@ parrafo("El video muestra la arquitectura del sistema, el código fuente princip
 
 doc.add_page_break()
 titulo("Capturas del sistema en producción")
-parrafo("(Insertar aquí las capturas del Dashboard, Registro de Incidentes, Listado de Tickets y de la tabla tickets con registros reales, tomadas desde las URLs públicas.)")
+parrafo("Capturas tomadas directamente desde las URLs públicas (no localhost), con un ticket real creado, listado y persistido en la base de datos remota.")
+for nombre, leyenda in [
+    ("dashboard_produccion.png", "Figura 2. Dashboard en producción (https://helpdesk-datacenter-blush.vercel.app/dashboard), con datos reales servidos por la API."),
+    ("listado_tickets_produccion.png", "Figura 3. Listado de Tickets en producción, mostrando el incidente creado en vivo."),
+]:
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.add_run().add_picture(str(EVIDENCIAS / nombre), width=Inches(6.3))
+    cap = doc.add_paragraph(leyenda)
+    cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    cap.runs[0].italic = True
+    doc.add_page_break()
 
 titulo("Conclusiones técnicas")
 parrafo("La integración full-stack evidenció la importancia de separar responsabilidades entre frontend y backend desplegados en dominios distintos: fue necesario habilitar CORS explícitamente en el backend para que el navegador permitiera las peticiones del frontend en producción. El uso de un Blueprint (render.yaml) y de vercel.json permitió reproducir el entorno de despliegue de forma declarativa y documentada, cumpliendo el requisito de que el sistema sea 100% funcional en la web sin depender de localhost.")
@@ -193,9 +203,10 @@ parrafo("Angular, mediante su escape automático de interpolaciones y el uso de 
 
 titulo("Repositorio")
 parrafo_enlace("Repositorio principal", "https://github.com/JBorys687/helpdesk-datacenter")
-parrafo_enlace("Rama de desarrollo integrada", "https://github.com/JBorys687/helpdesk-datacenter/tree/develop")
+parrafo_enlace("Rama de desarrollo integrada (unifica backend y frontend)", "https://github.com/JBorys687/helpdesk-datacenter/tree/develop")
 parrafo_enlace("Rama del frontend (Actividad 9)", "https://github.com/JBorys687/helpdesk-datacenter/tree/feature/frontend-app")
-parrafo_enlace("Carpeta de la aplicación en Google Drive", URL_DRIVE)
+parrafo_enlace("URL pública del sistema (frontend)", URL_FRONTEND)
+parrafo_enlace("URL pública de la API (backend)", URL_BACKEND)
 
 titulo("Bibliografía")
 for referencia in [
