@@ -41,6 +41,8 @@ services:
       # URL pública del frontend en Vercel (Actividad 9).
       - key: CORS_ALLOWED_ORIGINS
         value: https://helpdesk-datacenter-blush.vercel.app
-      # No fijar PORT: Render inyecta su propio valor (normalmente 10000) y
-      # espera que el servicio escuche exactamente ahí; application.yml ya
-      # respeta ${PORT} automáticamente. Fijarlo aquí rompe el healthcheck.
+      # Render espera que los servicios Docker escuchen en el puerto 10000
+      # (es el puerto que usa internamente para el healthcheck/proxy),
+      # independientemente de EXPOSE en el Dockerfile.
+      - key: PORT
+        value: 10000
