@@ -1,0 +1,126 @@
+.listado {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.filtros {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.filtros input,
+.filtros select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font-size: 0.9rem;
+}
+
+.filtros input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.filtros button {
+  background: var(--color-primario);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio);
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+  background: var(--color-superficie);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.tabla-tickets {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.tabla-tickets th,
+.tabla-tickets td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-borde);
+  font-size: 0.9rem;
+}
+
+.tabla-tickets th {
+  background: var(--color-primario-claro);
+  color: var(--color-primario-oscuro);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tabla-tickets tbody tr:hover {
+  background: var(--color-fondo);
+}
+
+.celda-titulo {
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.celda-acciones {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-icono {
+  background: transparent;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.95rem;
+}
+
+.btn-peligro {
+  border-color: var(--color-error);
+}
+
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 43, 34, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal-tarjeta {
+  background: var(--color-superficie);
+  border-radius: var(--radio);
+  padding: 1.8rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--sombra-fuerte);
+}
+
+.btn-peligro-solido {
+  background: var(--color-error);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .filtros {
+    flex-direction: column;
+  }
+}

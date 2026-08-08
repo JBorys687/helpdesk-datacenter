@@ -1,0 +1,25 @@
+<div class="login-page">
+  <form class="login-card" (ngSubmit)="ingresar()" novalidate>
+    <img src="logo-utm.png" alt="Universidad Técnica de Manabí" class="login-logo" />
+    <h1>Help Desk</h1>
+    <p class="subtitulo">Sistema de Gestión de Incidentes</p>
+
+    <label for="usuario">Usuario</label>
+    <input id="usuario" name="usuario" type="text" [(ngModel)]="usuario" autocomplete="username" required />
+
+    <label for="clave">Contraseña</label>
+    <input id="clave" name="clave" type="password" [(ngModel)]="clave" autocomplete="current-password" required />
+
+    @if (error()) {
+      <p class="mensaje-error">Ingresa usuario y contraseña de la API.</p>
+    }
+
+    <button type="submit">Iniciar sesión</button>
+    <p class="ayuda">
+      Usa las credenciales HTTP Basic configuradas en el backend
+      (por defecto usuario <code>user</code> y la contraseña generada al iniciar la API,
+      o las que definas con <code>SPRING_SECURITY_USER_NAME</code> /
+      <code>SPRING_SECURITY_USER_PASSWORD</code>).
+    </p>
+  </form>
+</div>
