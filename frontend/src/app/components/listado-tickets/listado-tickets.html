@@ -1,0 +1,94 @@
+<section class="listado">
+  <header class="dashboard-header">
+    <h1>Listado de Tickets</h1>
+    <p>Consulta, actualiza el estado o elimina los incidentes registrados.</p>
+  </header>
+
+  <div class="filtros">
+    <input type="text" placeholder="Buscar por título…" [ngModel]="filtroTexto()" (ngModelChange)="filtroTexto.set($event)" />
+
+    <select [ngModel]="filtroCategoria()" (ngModelChange)="filtroCategoria.set($event)">
+      <option value="TODAS">Todas las categorías</option>
+      @for (categoria of categorias; track categoria) {
+        <option [value]="categoria">{{ categoria }}</option>
+      }
+    </select>
+
+    <select [ngModel]="filtroEstado()" (ngModelChange)="filtroEstado.set($event)">
+      <option value="TODOS">Todos los estados</option>
+      @for (estado of estados; track estado) {
+        <option [value]="estado">{{ estado }}</option>
+      }
+    </select>
+
+    <button type="button" (click)="cargarTickets()">Actualizar</button>
+  </div>
+
+  @if (cargando()) {
+    <p class="estado-info">Cargando tickets…</p>
+  } @else if (error()) {
+    <p class="estado-error">Ocurrió un error al comunicarse con la API.</p>
+  } @else if (ticketsFiltrados().length === 0) {
+    <p class="estado-info">No hay tickets que coincidan con el filtro.</p>
+  } @else {
+    <div class="tabla-scroll">
+      <table class="tabla-tickets">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Categoría</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th>Actualizado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ticket of ticketsFiltrados(); track ticket.id) {
+            <tr>
+              <td>{{ ticket.id }}</td>
+              <td class="celda-titulo" [title]="ticket.descripcion">{{ ticket.titulo }}</td>
+              <td>{{ ticket.categoria }}</td>
+              <td><span class="badge" [class]="'badge-prioridad-' + ticket.prioridad">{{ ticket.prioridad }}</span></td>
+              <td>
+                @if (ticketEnEdicion() === ticket.id) {
+                  <select [ngModel]="estadoEnEdicion()" (ngModelChange)="estadoEnEdicion.set($event)">
+                    @for (estado of estados; track estado) {
+                      <option [value]="estado">{{ estado }}</option>
+                    }
+                  </select>
+                } @else {
+                  <span class="badge" [class]="'badge-' + ticket.estado">{{ ticket.estado }}</span>
+                }
+              </td>
+              <td>{{ ticket.actualizadoEn | date: 'short' }}</td>
+              <td class="celda-acciones">
+                @if (ticketEnEdicion() === ticket.id) {
+                  <button type="button" class="btn-icono" (click)="guardarEstado(ticket, estadoEnEdicion())">💾</button>
+                  <button type="button" class="btn-icono" (click)="cancelarEdicion()">✖</button>
+                } @else {
+                  <button type="button" class="btn-icono" (click)="editarEstado(ticket)" title="Cambiar estado">✏️</button>
+                  <button type="button" class="btn-icono btn-peligro" (click)="pedirConfirmacionEliminar(ticket)" title="Eliminar">🗑️</button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (ticketAEliminar(); as ticket) {
+    <div class="modal-fondo" (click)="cancelarEliminar()">
+      <div class="modal-tarjeta" (click)="$event.stopPropagation()">
+        <h2>Eliminar ticket</h2>
+        <p>¿Seguro que deseas eliminar el ticket <strong>#{{ ticket.id }} — {{ ticket.titulo }}</strong>? Esta acción no se puede deshacer.</p>
+        <div class="acciones-formulario">
+          <button type="button" class="btn-peligro-solido" (click)="confirmarEliminar()">Eliminar</button>
+          <button type="button" class="btn-secundario" (click)="cancelarEliminar()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  }
+</section>

@@ -1,0 +1,6 @@
+@if (mostrarNavegacion) {
+  <app-navegacion></app-navegacion>
+}
+<main [class.con-navbar]="mostrarNavegacion">
+  <router-outlet></router-outlet>
+</main>

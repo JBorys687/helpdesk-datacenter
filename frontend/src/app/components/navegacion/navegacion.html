@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <div class="navbar-marca">
+    <img src="logo-utm.png" alt="UTM" class="navbar-logo" />
+    <span>Help Desk · UTM</span>
+  </div>
+
+  <button class="navbar-toggle" type="button" (click)="alternarMenu()" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="navbar-links" [class.abierto]="menuAbierto()">
+    <li><a routerLink="/dashboard" routerLinkActive="activo" (click)="cerrarMenu()">Dashboard</a></li>
+    <li><a routerLink="/registro" routerLinkActive="activo" (click)="cerrarMenu()">Registrar Incidente</a></li>
+    <li><a routerLink="/listado" routerLinkActive="activo" (click)="cerrarMenu()">Listado de Tickets</a></li>
+    <li class="navbar-usuario">
+      <span>👤 {{ usuario }}</span>
+      <button type="button" class="btn-salir" (click)="salir()">Salir</button>
+    </li>
+  </ul>
+</nav>

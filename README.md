@@ -106,3 +106,37 @@ git push origin develop feature/backend-api
 
 Antes de entregar, añada al informe PDF el enlace del repositorio, capturas de las
 respuestas `200`, `201` y `204`, el controlador principal y el resultado de `mvn test`.
+
+## Actividad 9 — Frontend e integración Full Stack
+
+El frontend (Angular 22, SPA) vive en [`frontend/`](frontend/README.md) y consume
+esta misma API. Estructura del repositorio:
+
+```text
+/                    Backend (Actividad 8) — Java 21 / Spring Boot / PostgreSQL
+frontend/            Frontend (Actividad 9) — Angular 22
+render.yaml           Blueprint de despliegue del backend + BD en Render
+frontend/vercel.json  Configuración de despliegue del frontend en Vercel
+docs/                 Documentación, evidencias y guía de despliegue
+```
+
+### Despliegue en la nube
+
+| Componente | Servicio | URL pública |
+|---|---|---|
+| Base de datos (PostgreSQL) | Render | interna (gestionada por Render) |
+| Backend (API REST) | Render | _pendiente — se completa tras el despliegue_ |
+| Frontend (SPA) | Vercel | _pendiente — se completa tras el despliegue_ |
+
+Ver la guía paso a paso en [`docs/GUIA_DESPLIEGUE.md`](docs/GUIA_DESPLIEGUE.md).
+
+### Flujo Git de esta actividad
+
+```bash
+git switch develop
+git switch -c feature/frontend-app
+# ... desarrollo del frontend ...
+git switch develop
+git merge --no-ff feature/frontend-app
+git push origin develop feature/frontend-app
+```
